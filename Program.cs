@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Diagnostics;
 
-using Chess.engine;
+using Goofy.engine;
 
-namespace Chess
+namespace Goofy
 {
     class Program
     {

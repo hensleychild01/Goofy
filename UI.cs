@@ -1,25 +1,33 @@
-using Chess.engine;
+using Goofy.engine;
 
-namespace Chess
+namespace Goofy
 {
     public static class UI
     {
         public static void Run()
         {
             Board board = new(Board.StartingFEN);
-            PrintBoard(board);
 
             bool running = true;
-            while (running) 
+            while (running)
             {
+                Print(board);
                 string? cmd = Console.ReadLine();
                 if (cmd == null || cmd == "") break;
-                board.Play(new Move(cmd));
-                PrintBoard(board);
+
+                string[] moves = cmd.Split(' ');
+                foreach (string move in moves)
+                    ApplyMove(board, move);
             }
         }
 
-        private static void PrintBoard(Board board)
+        private static void ApplyMove(Board board, string input) 
+        {
+            Move move = new(input);
+            board.Play(move);
+        }
+
+        private static void Print(Board board)
         {
             Console.WriteLine();
             for (int rank = 7; rank >= 0; rank--)
@@ -28,7 +36,7 @@ namespace Chess
                 for (int file = 0; file < 8; file++)
                 {
                     Piece piece = board[rank, file];
-                    PrintPiece(piece);
+                    Print(piece);
                 }
                 Console.WriteLine();
             }
@@ -36,7 +44,7 @@ namespace Chess
             Console.WriteLine("  A B C D E F G H");
         }
 
-        private static void PrintPiece(Piece piece)
+        private static void Print(Piece piece)
         {
             Console.Write(Notation.ToChar(piece));
             Console.Write(' ');

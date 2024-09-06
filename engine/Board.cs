@@ -1,4 +1,4 @@
-namespace Chess.engine
+namespace Goofy.engine
 {
 
     public enum Piece
